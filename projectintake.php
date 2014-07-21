@@ -3,6 +3,86 @@
 require_once 'projectintake.civix.php';
 
 /**
+ * Implementation of hook_civicrm_aclWhereClause
+ * 
+ * Check if the current user is customer contact and retreive for every customer 
+ * the country coordinator(s) and the local rep(s)
+ * 
+ * @param type $type
+ * @param type $tables
+ * @param type $whereTables
+ * @param type $contactID
+ * @param type $where
+ */
+function projectintake_civicrm_aclWhereClause( $type, &$tables, &$whereTables, &$contactID, &$where ) {
+  //select all customers for this contact
+  $return = false;
+  $config = CRM_Projectintake_Config::singleton();
+  $customer_contact_rel_type_id = $config->getCustomerContactRelationTypeId();
+  $cc_rel_type_id = $config->getCountryCoordinatorRelationTypeId();
+  $loc_rep_rel_type_id = $config->getLocalRepRelationTypeId();
+  if ($customer_contact_rel_type_id === false || $cc_rel_type_id === false || $loc_rep_rel_type_id === false) {
+    return false;
+  }
+  
+  $clauses = array();
+  
+  //find customers for this contact
+  $dao = CRM_Core_DAO::executeQuery("SELECT `contact_id_a` FROM `civicrm_relationship` WHERE `relationship_type_id`  = %1 AND `contact_id_b` = %2", array(
+    1 => array($customer_contact_rel_type_id, 'Integer'),
+    2 => array($contactID, 'Integer'),
+  ));
+  while ($dao->fetch()) {
+    $cc_table_name = 'cc_'.$dao->contact_id_a;
+    $loc_rep_table_name = 'loc_rep_'.$dao->contact_id_a;
+    
+    //retrieve the country contact id of the customer
+    $country_id = _projectintake_country_contact_id($dao->contact_id_a);
+    if (empty($country_id)) {
+      continue; //continue customer is not linked to a country
+    }
+    
+    //access to customer
+    $clauses[] = " (contact_a.id = '".$dao->contact_id_a."')";
+    
+   $tables[$cc_table_name] = $whereTables[$cc_table_name] = 
+        "LEFT JOIN `civicrm_relationship` `{$cc_table_name}` ON contact_a.id = {$cc_table_name}.contact_id_b";     
+   $clauses[] = " ({$cc_table_name}.relationship_type_id = '".$cc_rel_type_id."' AND {$cc_table_name}.contact_id_a = '".$country_id."')";     
+   
+   $tables[$loc_rep_table_name] = $whereTables[$loc_rep_table_name] = 
+        "LEFT JOIN `civicrm_relationship` `{$loc_rep_table_name}` ON contact_a.id = {$loc_rep_table_name}.contact_id_b";
+   $clauses[] .= " ({$loc_rep_table_name}.relationship_type_id = '".$loc_rep_rel_type_id."' AND {$loc_rep_table_name}.contact_id_a = '".$country_id."')";
+  }
+  
+  if ( ! empty( $clauses ) ) {
+    $where .= ' (' . implode( ' OR ', $clauses ) . ')';
+    $return = true;
+  }
+  
+  return $return;
+}
+
+function _projectintake_country_contact_id($contact_id) {
+  $config = CRM_Projectintake_Config::singleton();
+  $country_field_id = $config->getCountryCustomFieldId();
+  if (empty($country_field_id)) {
+    return false;
+  }
+  
+  $address = civicrm_api3('Address', 'getsingle', array('is_primary' => '1', 'contact_id' => $contact_id));
+  if (empty($address['country_id'])) {
+    return false;
+  }
+  
+  $params['custom_'.$country_field_id] = $address['country_id'];
+  $contact = civicrm_api3('Contact', 'getsingle', $params);
+  if (isset($contact['id'])) {
+    return $contact['id'];
+  }
+  return false;
+}
+
+/**
  * Implementation of hook_civicrm_config
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_config
