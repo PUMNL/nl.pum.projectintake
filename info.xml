@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<extension key="nl.pum.projectintake" type="module">
+  <file>projectintake</file>
+  <name>Projectintake</name>
+  <description>Customisations for projectinatke. Consisting of permission check for role customer contact so that he/she is allowed to see the country coordinator and local reps of the country of the customer</description>
+  <license>AGPL-3.0</license>
+  <maintainer>
+    <author>Jaap Jansma</author>
+    <email>helpdesk@civicoop.org</email>
+  </maintainer>
+  <releaseDate>2014-07-21</releaseDate>
+  <version>1.0</version>
+  <develStage>alpha</develStage>
+  <compatibility>
+    <ver>4.2</ver>
+  </compatibility>
+  <comments>This is a new, undeveloped module</comments>
+  <civix>
+    <namespace>CRM/Projectintake</namespace>
+  </civix>
+</extension>
