@@ -28,7 +28,7 @@ function projectintake_civicrm_aclWhereClause( $type, &$tables, &$whereTables, &
   $clauses = array();
   
   //find customers for this contact
-  $dao = CRM_Core_DAO::executeQuery("SELECT `contact_id_a` FROM `civicrm_relationship` WHERE `relationship_type_id`  = %1 AND `contact_id_b` = %2", array(
+  $dao = CRM_Core_DAO::executeQuery("SELECT `contact_id_a` FROM `civicrm_relationship` WHERE `relationship_type_id`  = %1 AND `contact_id_b` = %2 AND `is_active` = 1  AND (`start_date` <= CURDATE() OR `start_date` IS NULL) AND (`end_date` >= CURDATE() OR `end_date` IS NULL)", array(
     1 => array($customer_contact_rel_type_id, 'Integer'),
     2 => array($contactID, 'Integer'),
   ));
@@ -48,12 +48,12 @@ function projectintake_civicrm_aclWhereClause( $type, &$tables, &$whereTables, &
    $tables[$cc_table_name] = $whereTables[$cc_table_name] = 
         "LEFT JOIN `civicrm_relationship` `{$cc_table_name}` ON contact_a.id = {$cc_table_name}.contact_id_b";     
    $clauses[] = " ({$cc_table_name}.relationship_type_id = '".$cc_rel_type_id."' AND {$cc_table_name}.contact_id_a = '".$country_id."' 
-      AND `{$cc_table_name}`.`is_active` AND (`{$cc_table_name}`.`start_date` <= CURDATE() OR `{$cc_table_name}`.`start_date` IS NULL) AND (`{$cc_table_name}`.`end_date` >= CURDATE() OR `{$cc_table_name}`.`end_date` IS NULL))";     
+      AND `{$cc_table_name}`.`is_active` = '1' AND (`{$cc_table_name}`.`start_date` <= CURDATE() OR `{$cc_table_name}`.`start_date` IS NULL) AND (`{$cc_table_name}`.`end_date` >= CURDATE() OR `{$cc_table_name}`.`end_date` IS NULL))";     
    
    $tables[$loc_rep_table_name] = $whereTables[$loc_rep_table_name] = 
         "LEFT JOIN `civicrm_relationship` `{$loc_rep_table_name}` ON contact_a.id = {$loc_rep_table_name}.contact_id_b";
    $clauses[] .= " ({$loc_rep_table_name}.relationship_type_id = '".$loc_rep_rel_type_id."' AND {$loc_rep_table_name}.contact_id_a = '".$country_id."')
-        AND `{$loc_rep_table_name}`.`is_active` AND (`{$loc_rep_table_name}`.`start_date` <= CURDATE() OR `{$loc_rep_table_name}`.`start_date` IS NULL) AND (`{$loc_rep_table_name}`.`end_date` >= CURDATE() OR `{$loc_rep_table_name}`.`end_date` IS NULL)";
+        AND `{$loc_rep_table_name}`.`is_active` = '1' AND (`{$loc_rep_table_name}`.`start_date` <= CURDATE() OR `{$loc_rep_table_name}`.`start_date` IS NULL) AND (`{$loc_rep_table_name}`.`end_date` >= CURDATE() OR `{$loc_rep_table_name}`.`end_date` IS NULL)";
   }
   
   if ( ! empty( $clauses ) ) {
