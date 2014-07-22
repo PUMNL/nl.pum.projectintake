@@ -47,11 +47,13 @@ function projectintake_civicrm_aclWhereClause( $type, &$tables, &$whereTables, &
     
    $tables[$cc_table_name] = $whereTables[$cc_table_name] = 
         "LEFT JOIN `civicrm_relationship` `{$cc_table_name}` ON contact_a.id = {$cc_table_name}.contact_id_b";     
-   $clauses[] = " ({$cc_table_name}.relationship_type_id = '".$cc_rel_type_id."' AND {$cc_table_name}.contact_id_a = '".$country_id."')";     
+   $clauses[] = " ({$cc_table_name}.relationship_type_id = '".$cc_rel_type_id."' AND {$cc_table_name}.contact_id_a = '".$country_id."' 
+      AND `{$cc_table_name}`.`is_active` AND (`{$cc_table_name}`.`start_date` <= CURDATE() OR `{$cc_table_name}`.`start_date` IS NULL) AND (`{$cc_table_name}`.`end_date` >= CURDATE() OR `{$cc_table_name}`.`end_date` IS NULL))";     
    
    $tables[$loc_rep_table_name] = $whereTables[$loc_rep_table_name] = 
         "LEFT JOIN `civicrm_relationship` `{$loc_rep_table_name}` ON contact_a.id = {$loc_rep_table_name}.contact_id_b";
-   $clauses[] .= " ({$loc_rep_table_name}.relationship_type_id = '".$loc_rep_rel_type_id."' AND {$loc_rep_table_name}.contact_id_a = '".$country_id."')";
+   $clauses[] .= " ({$loc_rep_table_name}.relationship_type_id = '".$loc_rep_rel_type_id."' AND {$loc_rep_table_name}.contact_id_a = '".$country_id."')
+        AND `{$loc_rep_table_name}`.`is_active` AND (`{$loc_rep_table_name}`.`start_date` <= CURDATE() OR `{$loc_rep_table_name}`.`start_date` IS NULL) AND (`{$loc_rep_table_name}`.`end_date` >= CURDATE() OR `{$loc_rep_table_name}`.`end_date` IS NULL)";
   }
   
   if ( ! empty( $clauses ) ) {
