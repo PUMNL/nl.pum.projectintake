@@ -18,7 +18,7 @@ class CRM_Projectintake_Config {
   
   private function __construct() {
     $this->customerContactRelation = civicrm_api3('RelationshipType', 'getsingle', array('name_b_a' => 'Authorised contact for'));
-    $this->ccRelation = civicrm_api3('RelationshipType', 'getsingle', array('name_a_b' => 'Country Coordinator'));
+    $this->ccRelation = civicrm_api3('RelationshipType', 'getsingle', array('name_a_b' => 'Country Coordinator is'));
     $this->locRepRelation = civicrm_api3('RelationshipType', 'getsingle', array('name_a_b' => 'Representative'));
 
     $gid = civicrm_api3('CustomGroup', 'getvalue', array('return' => 'id', 'name' => 'pumCountry'));
