@@ -7,7 +7,7 @@ $open_case_act_id = civicrm_api3('OptionValue', 'getvalue', array('return' => 'v
 $asses_proj_req_act_id = civicrm_api3('OptionValue', 'getvalue', array('return' => 'value', 'name' => 'Assessment Project Request by Rep', 'option_group_id' => $activity_type_option_group));
 $local_rep_rel_type_id = civicrm_api3('RelationshipType', 'getvalue', array('name_a_b' => 'Representative', 'return' => 'id'));
 
-$asses_webform_path = 'asses-project-request-by-representative';
+$asses_webform_path = '/representative/projects-requests/asses';
 
 $view = new view();
 $view->name = 'projectinatke_for_local_rep';
@@ -160,6 +160,14 @@ $handler->display->display_options['fields']['id_2']['label'] = '';
 $handler->display->display_options['fields']['id_2']['exclude'] = TRUE;
 $handler->display->display_options['fields']['id_2']['element_label_colon'] = FALSE;
 $handler->display->display_options['fields']['id_2']['separator'] = '';
+/* Field: CiviCRM Contacts: Contact Hash */
+$handler->display->display_options['fields']['hash']['id'] = 'hash';
+$handler->display->display_options['fields']['hash']['table'] = 'civicrm_contact';
+$handler->display->display_options['fields']['hash']['field'] = 'hash';
+$handler->display->display_options['fields']['hash']['relationship'] = 'contact_id';
+$handler->display->display_options['fields']['hash']['label'] = '';
+$handler->display->display_options['fields']['hash']['exclude'] = TRUE;
+$handler->display->display_options['fields']['hash']['element_label_colon'] = FALSE;
 /* Field: CiviCRM Activities: Scheduled Activity Date */
 $handler->display->display_options['fields']['activity_date_time']['id'] = 'activity_date_time';
 $handler->display->display_options['fields']['activity_date_time']['table'] = 'civicrm_activity';
@@ -192,7 +200,7 @@ $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
 $handler->display->display_options['fields']['nothing']['table'] = 'views';
 $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
 $handler->display->display_options['fields']['nothing']['label'] = '';
-$handler->display->display_options['fields']['nothing']['alter']['text'] = '<a href="'.$asses_webform_path.'?cid2=[id_2]&caseid=[id_1]">Asses</a>';
+$handler->display->display_options['fields']['nothing']['alter']['text'] = '<a href="'.$asses_webform_path.'?cid2=[id_2]&caseid=[id_1]&cs2=[hash]">Asses</a>';
 $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
 $handler->display->display_options['filter_groups']['groups'] = array(
   1 => 'AND',
