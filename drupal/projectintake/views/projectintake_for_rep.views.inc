@@ -28,7 +28,6 @@ $handler->display->display_options['access']['role'] = array(
   6 => '6',
 );
 $handler->display->display_options['group_by'] = TRUE;
-$handler->display->display_options['access']['type'] = 'none';
 $handler->display->display_options['cache']['type'] = 'none';
 $handler->display->display_options['query']['type'] = 'views_query';
 $handler->display->display_options['query']['options']['distinct'] = TRUE;
