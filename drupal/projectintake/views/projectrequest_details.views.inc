@@ -24,6 +24,7 @@ $handler->display->display_options['title'] = 'Projectrequest';
 $handler->display->display_options['use_more_always'] = FALSE;
 $handler->display->display_options['access']['type'] = 'role';
 $handler->display->display_options['access']['role'] = array(
+  4 => '4',
   6 => '6',
 );
 $handler->display->display_options['cache']['type'] = 'none';
@@ -95,14 +96,6 @@ if ($comments_field) {
   $handler->display->display_options['fields'][$comments_field]['element_label_type'] = 'strong';
   $handler->display->display_options['fields'][$comments_field]['empty'] = '<p>-</a>';
 }
-/* Field: Global: Custom text */
-$handler->display->display_options['fields']['nothing']['id'] = 'nothing';
-$handler->display->display_options['fields']['nothing']['table'] = 'views';
-$handler->display->display_options['fields']['nothing']['field'] = 'nothing';
-$handler->display->display_options['fields']['nothing']['label'] = '';
-$handler->display->display_options['fields']['nothing']['alter']['text'] = '<a href="/representative/projects-requests/asses?cid2=[id_1]&caseid=[id]">Asses</a>';
-$handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
-$handler->display->display_options['fields']['nothing']['element_wrapper_type'] = 'p';
 /* Contextual filter: CiviCRM Cases: Case ID */
 $handler->display->display_options['arguments']['id']['id'] = 'id';
 $handler->display->display_options['arguments']['id']['table'] = 'civicrm_case';
@@ -122,4 +115,4 @@ $handler->display->display_options['filters']['case_type']['value'] = array(
 
 /* Display: Page */
 $handler = $view->new_display('page', 'Page', 'page');
-$handler->display->display_options['path'] = 'representative/projectrequest/details';
+$handler->display->display_options['path'] = 'customer/projectrequest/details';

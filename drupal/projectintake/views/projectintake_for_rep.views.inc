@@ -188,7 +188,7 @@ $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
 $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
 $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
 $handler->display->display_options['fields']['nothing_1']['label'] = '';
-$handler->display->display_options['fields']['nothing_1']['alter']['text'] = '<a href="/representative/projectrequest/details/[id_1]">View project request</a>';
+$handler->display->display_options['fields']['nothing_1']['alter']['text'] = '<a href="/customer/projectrequest/details/[id_1]">View project request</a>';
 $handler->display->display_options['fields']['nothing_1']['element_label_colon'] = FALSE;
 /* Field: Global: Custom text */
 $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
