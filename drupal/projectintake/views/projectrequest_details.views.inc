@@ -45,11 +45,13 @@ $handler->display->display_options['fields']['id_1']['table'] = 'civicrm_contact
 $handler->display->display_options['fields']['id_1']['field'] = 'id';
 $handler->display->display_options['fields']['id_1']['relationship'] = 'contact_id';
 $handler->display->display_options['fields']['id_1']['exclude'] = TRUE;
+$handler->display->display_options['fields']['id_1']['separator'] = '';
 /* Field: CiviCRM Cases: Case ID */
 $handler->display->display_options['fields']['id']['id'] = 'id';
 $handler->display->display_options['fields']['id']['table'] = 'civicrm_case';
 $handler->display->display_options['fields']['id']['field'] = 'id';
 $handler->display->display_options['fields']['id']['exclude'] = TRUE;
+$handler->display->display_options['fields']['id']['separator'] = '';
 /* Field: CiviCRM Contacts: Display Name */
 $handler->display->display_options['fields']['display_name']['id'] = 'display_name';
 $handler->display->display_options['fields']['display_name']['table'] = 'civicrm_contact';
