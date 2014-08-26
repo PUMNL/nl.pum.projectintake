@@ -181,14 +181,19 @@ $handler->display->display_options['fields']['display_name']['field'] = 'display
 $handler->display->display_options['fields']['display_name']['relationship'] = 'contact_id';
 $handler->display->display_options['fields']['display_name']['label'] = 'Customer';
 $handler->display->display_options['fields']['display_name']['alter']['make_link'] = TRUE;
-$handler->display->display_options['fields']['display_name']['alter']['path'] = '/customer/[id_2]';
+$handler->display->display_options['fields']['display_name']['alter']['path'] = 'customer/[id_2]';
+$handler->display->display_options['fields']['display_name']['alter']['absolute'] = TRUE;
 $handler->display->display_options['fields']['display_name']['link_to_civicrm_contact'] = 0;
 /* Field: Global: Custom text */
 $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
 $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
 $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
 $handler->display->display_options['fields']['nothing_1']['label'] = '';
-$handler->display->display_options['fields']['nothing_1']['alter']['text'] = '<a href="/customer/projectrequest/details/[id_1]">View project request</a>';
+//$handler->display->display_options['fields']['nothing_1']['alter']['text'] = '<a href="/customer/projectrequest/details/[id_1]">View project request</a>';
+$handler->display->display_options['fields']['nothing_1']['alter']['text'] = 'View project request';
+$handler->display->display_options['fields']['nothing_1']['alter']['make_link'] = TRUE;
+$handler->display->display_options['fields']['nothing_1']['alter']['path'] = 'customer/projectrequest/details/[id_1]';
+$handler->display->display_options['fields']['nothing_1']['alter']['absolute'] = TRUE;
 $handler->display->display_options['fields']['nothing_1']['element_label_colon'] = FALSE;
 /* Field: Global: Custom text */
 $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
