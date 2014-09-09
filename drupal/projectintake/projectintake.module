@@ -18,3 +18,16 @@ function projectintake_views_default_views() {
   }
   return $views;
 }
+
+function projectintake_get_role_ids($roles) {
+  $rids = array();
+  $available_roles = user_roles();
+  foreach($roles as $role) {
+    $rid = array_search($role, $available_roles);
+    if ($rid !== false) {
+      $rids[$rid] = $rid;
+    }
+  }
+  
+  return $rids;
+}
