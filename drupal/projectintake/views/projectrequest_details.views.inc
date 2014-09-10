@@ -11,7 +11,7 @@ $comments_field = civicrm_api3('CustomField', 'getvalue', array('return' => 'col
 $view = new view();
 $view->name = 'projectrequest_details';
 $view->description = '';
-$view->tag = 'default';
+$view->tag = 'projectintake';
 $view->base_table = 'civicrm_case';
 $view->human_name = 'Projectrequest details';
 $view->core = 7;
@@ -23,10 +23,7 @@ $handler = $view->new_display('default', 'Master', 'default');
 $handler->display->display_options['title'] = 'Projectrequest';
 $handler->display->display_options['use_more_always'] = FALSE;
 $handler->display->display_options['access']['type'] = 'role';
-$handler->display->display_options['access']['role'] = array(
-  4 => '4',
-  6 => '6',
-);
+$handler->display->display_options['access']['role'] = projectintake_get_role_ids(array('Customer', 'Representative'));
 $handler->display->display_options['cache']['type'] = 'none';
 $handler->display->display_options['query']['type'] = 'views_query';
 $handler->display->display_options['exposed_form']['type'] = 'basic';

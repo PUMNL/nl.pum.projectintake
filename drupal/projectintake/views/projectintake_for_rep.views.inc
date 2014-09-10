@@ -13,11 +13,11 @@ $asses_webform_path = '/representative/projects-requests/asses';
 
 
 $view = new view();
-$view->name = 'projectinatke_for_local_rep';
+$view->name = 'projectintake_for_local_rep';
 $view->description = '';
-$view->tag = 'default';
+$view->tag = 'projectintake';
 $view->base_table = 'civicrm_case';
-$view->human_name = 'Projectinatke for Local Rep';
+$view->human_name = 'New project requests (for Representative)';
 $view->core = 7;
 $view->api_version = '3.0';
 $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
@@ -243,10 +243,10 @@ $handler->display->display_options['filters']['assessment_rep']['group'] = 2;
 
 /* Display: Page */
 $handler = $view->new_display('page', 'Page', 'page');
-$handler->display->display_options['path'] = 'representative/projects-requests';
+$handler->display->display_options['path'] = 'representative/new-projects-requests';
 $handler->display->display_options['menu']['type'] = 'normal';
-$handler->display->display_options['menu']['title'] = 'Project requests';
+$handler->display->display_options['menu']['title'] = 'New project requests';
 $handler->display->display_options['menu']['weight'] = '0';
-$handler->display->display_options['menu']['name'] = 'menu-webforms';
+$handler->display->display_options['menu']['name'] = 'navigation';
 $handler->display->display_options['menu']['context'] = 0;
 $handler->display->display_options['menu']['context_only_inline'] = 0;

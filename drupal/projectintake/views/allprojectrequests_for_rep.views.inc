@@ -2,24 +2,24 @@
 
 $case_type_option_group = civicrm_api3('OptionGroup', 'getvalue', array('return' => 'id', 'name' => 'case_type'));
 $project_intake_case_type_id = civicrm_api3('OptionValue', 'getvalue', array('return' => 'value', 'name' => 'Projectintake', 'option_group_id' => $case_type_option_group));
-$authorised_contact_rel_type_id = civicrm_api3('RelationshipType', 'getvalue', array('name_a_b' => 'Has authorised', 'return' => 'id'));
+$local_rep_rel_type_id = civicrm_api3('RelationshipType', 'getvalue', array('name_a_b' => 'Representative is', 'return' => 'id'));
 
 $view = new view();
-$view->name = 'my_project_requests_for_customer_';
+$view->name = 'al_project_requests_for_representative';
 $view->description = '';
 $view->tag = 'projectintake';
 $view->base_table = 'civicrm_case';
-$view->human_name = 'My project requests (for customer)';
+$view->human_name = 'All my project requests (for representative)';
 $view->core = 7;
 $view->api_version = '3.0';
 $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
 /* Display: Master */
 $handler = $view->new_display('default', 'Master', 'default');
-$handler->display->display_options['title'] = 'My project requests';
+$handler->display->display_options['title'] = 'All my project requests';
 $handler->display->display_options['use_more_always'] = FALSE;
 $handler->display->display_options['access']['type'] = 'role';
-$handler->display->display_options['access']['role'] = projectintake_get_role_ids(array('Customer'));
+$handler->display->display_options['access']['role'] = projectintake_get_role_ids(array('Representative'));
 $handler->display->display_options['cache']['type'] = 'none';
 $handler->display->display_options['query']['type'] = 'views_query';
 $handler->display->display_options['query']['options']['distinct'] = TRUE;
@@ -76,15 +76,15 @@ $handler->display->display_options['relationships']['relationship_id_a']['id'] =
 $handler->display->display_options['relationships']['relationship_id_a']['table'] = 'civicrm_contact';
 $handler->display->display_options['relationships']['relationship_id_a']['field'] = 'relationship_id_a';
 $handler->display->display_options['relationships']['relationship_id_a']['relationship'] = 'contact_id';
-$handler->display->display_options['relationships']['relationship_id_a']['label'] = 'Has Authorised relationship';
+$handler->display->display_options['relationships']['relationship_id_a']['label'] = 'Representative is relationship';
 $handler->display->display_options['relationships']['relationship_id_a']['required'] = TRUE;
-$handler->display->display_options['relationships']['relationship_id_a']['relationship_type'] = $authorised_contact_rel_type_id;
+$handler->display->display_options['relationships']['relationship_id_a']['relationship_type'] = $local_rep_rel_type_id;
 /* Relationship: CiviCRM Relationships: Contact ID B */
 $handler->display->display_options['relationships']['contact_id_b_']['id'] = 'contact_id_b_';
 $handler->display->display_options['relationships']['contact_id_b_']['table'] = 'civicrm_relationship';
 $handler->display->display_options['relationships']['contact_id_b_']['field'] = 'contact_id_b_';
 $handler->display->display_options['relationships']['contact_id_b_']['relationship'] = 'contact_id';
-$handler->display->display_options['relationships']['contact_id_b_']['label'] = 'Authorised contact';
+$handler->display->display_options['relationships']['contact_id_b_']['label'] = 'Representative';
 $handler->display->display_options['relationships']['contact_id_b_']['required'] = TRUE;
 /* Relationship: CiviCRM Contacts: Drupal ID */
 $handler->display->display_options['relationships']['drupal_id']['id'] = 'drupal_id';
@@ -100,16 +100,31 @@ $handler->display->display_options['fields']['id']['label'] = '';
 $handler->display->display_options['fields']['id']['exclude'] = TRUE;
 $handler->display->display_options['fields']['id']['element_label_colon'] = FALSE;
 $handler->display->display_options['fields']['id']['separator'] = '';
+/* Field: CiviCRM Contacts: Contact ID */
+$handler->display->display_options['fields']['id_1']['id'] = 'id_1';
+$handler->display->display_options['fields']['id_1']['table'] = 'civicrm_contact';
+$handler->display->display_options['fields']['id_1']['field'] = 'id';
+$handler->display->display_options['fields']['id_1']['relationship'] = 'contact_id';
+$handler->display->display_options['fields']['id_1']['label'] = '';
+$handler->display->display_options['fields']['id_1']['exclude'] = TRUE;
+$handler->display->display_options['fields']['id_1']['element_label_colon'] = FALSE;
+$handler->display->display_options['fields']['id_1']['separator'] = '';
 /* Field: CiviCRM Cases: Start Date */
 $handler->display->display_options['fields']['start_date']['id'] = 'start_date';
 $handler->display->display_options['fields']['start_date']['table'] = 'civicrm_case';
 $handler->display->display_options['fields']['start_date']['field'] = 'start_date';
 $handler->display->display_options['fields']['start_date']['label'] = 'Date';
 $handler->display->display_options['fields']['start_date']['date_format'] = 'short';
-/* Field: CiviCRM Cases: Subject */
-$handler->display->display_options['fields']['subject']['id'] = 'subject';
-$handler->display->display_options['fields']['subject']['table'] = 'civicrm_case';
-$handler->display->display_options['fields']['subject']['field'] = 'subject';
+/* Field: CiviCRM Contacts: Display Name */
+$handler->display->display_options['fields']['display_name']['id'] = 'display_name';
+$handler->display->display_options['fields']['display_name']['table'] = 'civicrm_contact';
+$handler->display->display_options['fields']['display_name']['field'] = 'display_name';
+$handler->display->display_options['fields']['display_name']['relationship'] = 'contact_id';
+$handler->display->display_options['fields']['display_name']['label'] = 'Customer';
+$handler->display->display_options['fields']['display_name']['alter']['make_link'] = TRUE;
+$handler->display->display_options['fields']['display_name']['alter']['path'] = 'customer/[id_1]';
+$handler->display->display_options['fields']['display_name']['alter']['absolute'] = TRUE;
+$handler->display->display_options['fields']['display_name']['link_to_civicrm_contact'] = 0;
 /* Field: CiviCRM Cases: Case Status */
 $handler->display->display_options['fields']['status']['id'] = 'status';
 $handler->display->display_options['fields']['status']['table'] = 'civicrm_case';
@@ -138,10 +153,10 @@ $handler->display->display_options['filters']['uid_current']['value'] = '1';
 
 /* Display: Page */
 $handler = $view->new_display('page', 'Page', 'page');
-$handler->display->display_options['path'] = 'customer/my-project-requests';
+$handler->display->display_options['path'] = 'representative/all-my-project-requests';
 $handler->display->display_options['menu']['type'] = 'normal';
-$handler->display->display_options['menu']['title'] = 'My project requests';
-$handler->display->display_options['menu']['weight'] = '0';
+$handler->display->display_options['menu']['title'] = 'All my project requests';
+$handler->display->display_options['menu']['weight'] = '1';
 $handler->display->display_options['menu']['name'] = 'navigation';
 $handler->display->display_options['menu']['context'] = 0;
 $handler->display->display_options['menu']['context_only_inline'] = 0;
