@@ -100,6 +100,13 @@ $handler->display->display_options['fields']['id']['label'] = '';
 $handler->display->display_options['fields']['id']['exclude'] = TRUE;
 $handler->display->display_options['fields']['id']['element_label_colon'] = FALSE;
 $handler->display->display_options['fields']['id']['separator'] = '';
+/* Field: CiviCRM Contacts: Display Name */
+$handler->display->display_options['fields']['display_name']['id'] = 'display_name';
+$handler->display->display_options['fields']['display_name']['table'] = 'civicrm_contact';
+$handler->display->display_options['fields']['display_name']['field'] = 'display_name';
+$handler->display->display_options['fields']['display_name']['relationship'] = 'contact_id';
+$handler->display->display_options['fields']['display_name']['label'] = 'Organisation';
+$handler->display->display_options['fields']['display_name']['link_to_civicrm_contact'] = 0;
 /* Field: CiviCRM Cases: Start Date */
 $handler->display->display_options['fields']['start_date']['id'] = 'start_date';
 $handler->display->display_options['fields']['start_date']['table'] = 'civicrm_case';
