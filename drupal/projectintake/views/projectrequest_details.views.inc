@@ -7,6 +7,31 @@ $activities_field = civicrm_api3('CustomField', 'getvalue', array('return' => 'c
 $expected_results_field = civicrm_api3('CustomField', 'getvalue', array('return' => 'column_name', 'name' => 'expected_results', 'custom_group_id' => $custom_group_id));
 $comments_field = civicrm_api3('CustomField', 'getvalue', array('return' => 'column_name', 'name' => 'Additional_Comments_on_Project_Proposal', 'custom_group_id' => $custom_group_id));
 
+$customer_data = civicrm_api3('CustomGroup', 'getsingle', array('name' => 'Customers_Data'));
+$model = civicrm_api3('CustomField', 'getvalue', array('name' => 'What_is_the_operational_model_of_the_organisation', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
+$services = civicrm_api3('CustomField', 'getvalue', array('name' => 'Products_and_or_Services_offered', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
+$when_where_sold = civicrm_api3('CustomField', 'getvalue', array('name' => 'Where_and_how_are_the_products_of_services_sold', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
+$ft_males = civicrm_api3('CustomField', 'getvalue', array('name' => 'Fulltime_Males', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
+$ft_femailes = civicrm_api3('CustomField', 'getvalue', array('name' => 'Fulltime_Females', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
+$turnover = civicrm_api3('CustomField', 'getvalue', array('name' => 'Total_turnover', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
+$balance = civicrm_api3('CustomField', 'getvalue', array('name' => 'Please_state_balance_sheet_total_of_last_year_in_', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
+$start_year = civicrm_api3('CustomField', 'getvalue', array('name' => 'In_which_year_was_your_organisation_founded_', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
+$legal_form = civicrm_api3('CustomField', 'getvalue', array('name' => 'Legal_form_of_the_Organisation', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
+$other_legal_form  = civicrm_api3('CustomField', 'getvalue', array('name' => 'Other_Legal_Form', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
+$is_holding = civicrm_api3('CustomField', 'getvalue', array('name' => 'Is_your_company_part_of_a_holding_group_of_companies_', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
+$holding_details = civicrm_api3('CustomField', 'getvalue', array('name' => 'Please_list_the_following_details_for_the_entire_holding', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
+$franchise = civicrm_api3('CustomField', 'getvalue', array('name' => 'Does_your_company_work_under_a_franchising_contract_', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
+$franchise_details = civicrm_api3('CustomField', 'getvalue', array('name' => 'Please_explain_your_relationship_with_the_franchiseholder', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
+$foreign_ownship = civicrm_api3('CustomField', 'getvalue', array('name' => 'Is_there_foreign_ownership_', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
+$percentage_foreign_ownship = civicrm_api3('CustomField', 'getvalue', array('name' => 'Percentage_of_Foreign_Ownership', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
+$foreign_ownship_details = civicrm_api3('CustomField', 'getvalue', array('name' => 'Please_list_information_of_foreign_owners', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
+$percantage_private_ownship = civicrm_api3('CustomField', 'getvalue', array('name' => 'Percentage_of_Ownership_Private', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
+$percantage_gov_ownship = civicrm_api3('CustomField', 'getvalue', array('name' => 'Percentage_of_Ownership_Government', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
+$percantage_other_ownship = civicrm_api3('CustomField', 'getvalue', array('name' => 'Percentage_of_Ownership_Other', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
+$how_did_you_hear = civicrm_api3('CustomField', 'getvalue', array('name' => 'How_did_your_company_first_hear_about_CBI_PUM_', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
+$other_how_did_your  = civicrm_api3('CustomField', 'getvalue', array('name' => 'Other_ways_of_hearing_about_PUM', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
+
+
 
 $view = new view();
 $view->name = 'projectrequest_details';
@@ -85,6 +110,134 @@ if ($expected_results_field) {
   $handler->display->display_options['fields'][$expected_results_field]['element_label_type'] = 'strong';
   $handler->display->display_options['fields'][$expected_results_field]['empty'] = '<p>-</a>';
 }
+/* Field: CiviCRM Custom: Customer Data: Fulltime Males */
+$handler->display->display_options['fields']['fulltime_males_786']['id'] = 'fulltime_males_786';
+$handler->display->display_options['fields']['fulltime_males_786']['table'] = $customer_data['table_name'];
+$handler->display->display_options['fields']['fulltime_males_786']['field'] = $ft_males;
+$handler->display->display_options['fields']['fulltime_males_786']['relationship'] = 'contact_id';
+/* Field: CiviCRM Custom: Customer Data: Fulltime Females */
+$handler->display->display_options['fields']['fulltime_females_787']['id'] = 'fulltime_females_787';
+$handler->display->display_options['fields']['fulltime_females_787']['table'] = $customer_data['table_name'];
+$handler->display->display_options['fields']['fulltime_females_787']['field'] = $ft_femailes;
+$handler->display->display_options['fields']['fulltime_females_787']['relationship'] = 'contact_id';
+/* Field: CiviCRM Custom: Customer Data: Total turnover */
+$handler->display->display_options['fields']['total_turnover_788']['id'] = 'total_turnover_788';
+$handler->display->display_options['fields']['total_turnover_788']['table'] = $customer_data['table_name'];
+$handler->display->display_options['fields']['total_turnover_788']['field'] = $turnover;
+$handler->display->display_options['fields']['total_turnover_788']['relationship'] = 'contact_id';
+/* Field: CiviCRM Custom: Customer Data: Please state balance sheet total of last year (in €) */
+$handler->display->display_options['fields']['please_state_balance_sheet_total_494']['id'] = 'please_state_balance_sheet_total_494';
+$handler->display->display_options['fields']['please_state_balance_sheet_total_494']['table'] = $customer_data['table_name'];
+$handler->display->display_options['fields']['please_state_balance_sheet_total_494']['field'] = $balance;
+$handler->display->display_options['fields']['please_state_balance_sheet_total_494']['relationship'] = 'contact_id';
+/* Field: CiviCRM Custom: Customer Data: What is the operational model of the organisation */
+$handler->display->display_options['fields']['what_is_the_operational_model_of_513']['id'] = 'what_is_the_operational_model_of_513';
+$handler->display->display_options['fields']['what_is_the_operational_model_of_513']['table'] = $customer_data['table_name'];
+$handler->display->display_options['fields']['what_is_the_operational_model_of_513']['field'] = $model;
+$handler->display->display_options['fields']['what_is_the_operational_model_of_513']['relationship'] = 'contact_id';
+$handler->display->display_options['fields']['what_is_the_operational_model_of_513']['alter']['strip_tags'] = TRUE;
+/* Field: CiviCRM Custom: Customer Data: Products and/or Services offered */
+$handler->display->display_options['fields']['products_and_or_services_offered_86']['id'] = 'products_and_or_services_offered_86';
+$handler->display->display_options['fields']['products_and_or_services_offered_86']['table'] = $customer_data['table_name'];
+$handler->display->display_options['fields']['products_and_or_services_offered_86']['field'] = $services;
+$handler->display->display_options['fields']['products_and_or_services_offered_86']['relationship'] = 'contact_id';
+$handler->display->display_options['fields']['products_and_or_services_offered_86']['alter']['strip_tags'] = TRUE;
+/* Field: CiviCRM Custom: Customer Data: Where and how are the products or services sold */
+$handler->display->display_options['fields']['where_and_how_are_the_products_o_89']['id'] = 'where_and_how_are_the_products_o_89';
+$handler->display->display_options['fields']['where_and_how_are_the_products_o_89']['table'] = $customer_data['table_name'];
+$handler->display->display_options['fields']['where_and_how_are_the_products_o_89']['field'] = $when_where_sold;
+$handler->display->display_options['fields']['where_and_how_are_the_products_o_89']['relationship'] = 'contact_id';
+$handler->display->display_options['fields']['where_and_how_are_the_products_o_89']['alter']['strip_tags'] = TRUE;
+/* Field: CiviCRM Custom: Customer Data: In which year did your organisation started operations? */
+$handler->display->display_options['fields']['in_which_year_was_your_organisat_503']['id'] = 'in_which_year_was_your_organisat_503';
+$handler->display->display_options['fields']['in_which_year_was_your_organisat_503']['table'] = $customer_data['table_name'];
+$handler->display->display_options['fields']['in_which_year_was_your_organisat_503']['field'] = $start_year;
+$handler->display->display_options['fields']['in_which_year_was_your_organisat_503']['relationship'] = 'contact_id';
+/* Field: CiviCRM Custom: Customer Data: Legal form of the Organisation */
+$handler->display->display_options['fields']['legal_form_of_the_organisation_76']['id'] = 'legal_form_of_the_organisation_76';
+$handler->display->display_options['fields']['legal_form_of_the_organisation_76']['table'] = $customer_data['table_name'];
+$handler->display->display_options['fields']['legal_form_of_the_organisation_76']['field'] = $legal_form;
+$handler->display->display_options['fields']['legal_form_of_the_organisation_76']['relationship'] = 'contact_id';
+$handler->display->display_options['fields']['legal_form_of_the_organisation_76']['alter']['strip_tags'] = TRUE;
+/* Field: CiviCRM Custom: Customer Data: Other Legal form of the Organisation */
+$handler->display->display_options['fields']['other_legal_form_of_the_organisation_76']['id'] = 'other_legal_form_of_the_organisation_76';
+$handler->display->display_options['fields']['other_legal_form_of_the_organisation_76']['table'] = $customer_data['table_name'];
+$handler->display->display_options['fields']['other_legal_form_of_the_organisation_76']['field'] = $other_legal_form;
+$handler->display->display_options['fields']['other_legal_form_of_the_organisation_76']['relationship'] = 'contact_id';
+$handler->display->display_options['fields']['other_legal_form_of_the_organisation_76']['alter']['strip_tags'] = TRUE;
+$handler->display->display_options['fields']['other_legal_form_of_the_organisation_76']['hide_empty'] = TRUE;
+/* Field: CiviCRM Custom: Customer Data: Is your company part of a holding/group of companies? */
+$handler->display->display_options['fields']['is_your_company_part_of_a_holdin_504']['id'] = 'is_your_company_part_of_a_holdin_504';
+$handler->display->display_options['fields']['is_your_company_part_of_a_holdin_504']['table'] = $customer_data['table_name'];
+$handler->display->display_options['fields']['is_your_company_part_of_a_holdin_504']['field'] = $is_holding;
+$handler->display->display_options['fields']['is_your_company_part_of_a_holdin_504']['relationship'] = 'contact_id';
+$handler->display->display_options['fields']['is_your_company_part_of_a_holdin_504']['alter']['strip_tags'] = TRUE;
+/* Field: CiviCRM Custom: Customer Data: Please list the following details for the entire holding */
+$handler->display->display_options['fields']['please_list_the_following_detail_505']['id'] = 'please_list_the_following_detail_505';
+$handler->display->display_options['fields']['please_list_the_following_detail_505']['table'] = $customer_data['table_name'];
+$handler->display->display_options['fields']['please_list_the_following_detail_505']['field'] = $holding_details;
+$handler->display->display_options['fields']['please_list_the_following_detail_505']['relationship'] = 'contact_id';
+$handler->display->display_options['fields']['please_list_the_following_detail_505']['alter']['strip_tags'] = TRUE;
+$handler->display->display_options['fields']['please_list_the_following_detail_505']['hide_empty'] = TRUE;
+/* Field: CiviCRM Custom: Customer Data: Does your company work under a franchising contract? */
+$handler->display->display_options['fields']['does_your_company_work_under_a_f_506']['id'] = 'does_your_company_work_under_a_f_506';
+$handler->display->display_options['fields']['does_your_company_work_under_a_f_506']['table'] = $customer_data['table_name'];
+$handler->display->display_options['fields']['does_your_company_work_under_a_f_506']['field'] = $franchise;
+$handler->display->display_options['fields']['does_your_company_work_under_a_f_506']['relationship'] = 'contact_id';
+/* Field: CiviCRM Custom: Customer Data: Please explain your relationship with the franchiseholder */
+$handler->display->display_options['fields']['please_explain_your_relationship_507']['id'] = 'please_explain_your_relationship_507';
+$handler->display->display_options['fields']['please_explain_your_relationship_507']['table'] = $customer_data['table_name'];
+$handler->display->display_options['fields']['please_explain_your_relationship_507']['field'] = $franchise_details;
+$handler->display->display_options['fields']['please_explain_your_relationship_507']['relationship'] = 'contact_id';
+$handler->display->display_options['fields']['please_explain_your_relationship_507']['alter']['strip_tags'] = TRUE;
+$handler->display->display_options['fields']['please_explain_your_relationship_507']['hide_empty'] = TRUE;
+/* Field: CiviCRM Custom: Customer Data: Is there foreign ownership? */
+$handler->display->display_options['fields']['is_there_foreign_ownership__508']['id'] = 'is_there_foreign_ownership__508';
+$handler->display->display_options['fields']['is_there_foreign_ownership__508']['table'] = $customer_data['table_name'];
+$handler->display->display_options['fields']['is_there_foreign_ownership__508']['field'] = $foreign_ownship;
+$handler->display->display_options['fields']['is_there_foreign_ownership__508']['relationship'] = 'contact_id';
+/* Field: CiviCRM Custom: Customer Data: Percentage of Foreign Ownership */
+$handler->display->display_options['fields']['percentage_of_foreign_ownership_79']['id'] = 'percentage_of_foreign_ownership_79';
+$handler->display->display_options['fields']['percentage_of_foreign_ownership_79']['table'] = $customer_data['table_name'];
+$handler->display->display_options['fields']['percentage_of_foreign_ownership_79']['field'] = $percentage_foreign_ownship;
+$handler->display->display_options['fields']['percentage_of_foreign_ownership_79']['relationship'] = 'contact_id';
+$handler->display->display_options['fields']['percentage_of_foreign_ownership_79']['hide_empty'] = TRUE;
+$handler->display->display_options['fields']['percentage_of_foreign_ownership_79']['empty_zero'] = TRUE;
+/* Field: CiviCRM Custom: Customer Data: Please list information of foreign owners */
+$handler->display->display_options['fields']['please_list_information_of_forei_509']['id'] = 'please_list_information_of_forei_509';
+$handler->display->display_options['fields']['please_list_information_of_forei_509']['table'] = $customer_data['table_name'];
+$handler->display->display_options['fields']['please_list_information_of_forei_509']['field'] = $foreign_ownship_details;
+$handler->display->display_options['fields']['please_list_information_of_forei_509']['relationship'] = 'contact_id';
+$handler->display->display_options['fields']['please_list_information_of_forei_509']['alter']['strip_tags'] = TRUE;
+$handler->display->display_options['fields']['please_list_information_of_forei_509']['hide_empty'] = TRUE;
+/* Field: CiviCRM Custom: Customer Data: Percentage of Ownership - Private */
+$handler->display->display_options['fields']['percentage_of_ownership_private_82']['id'] = 'percentage_of_ownership_private_82';
+$handler->display->display_options['fields']['percentage_of_ownership_private_82']['table'] = $customer_data['table_name'];
+$handler->display->display_options['fields']['percentage_of_ownership_private_82']['field'] = $percantage_private_ownship;
+$handler->display->display_options['fields']['percentage_of_ownership_private_82']['relationship'] = 'contact_id';
+/* Field: CiviCRM Custom: Customer Data: Percentage of Ownership - Government */
+$handler->display->display_options['fields']['percentage_of_ownership_governme_80']['id'] = 'percentage_of_ownership_governme_80';
+$handler->display->display_options['fields']['percentage_of_ownership_governme_80']['table'] = $customer_data['table_name'];
+$handler->display->display_options['fields']['percentage_of_ownership_governme_80']['field'] = $percantage_gov_ownship;
+$handler->display->display_options['fields']['percentage_of_ownership_governme_80']['relationship'] = 'contact_id';
+/* Field: CiviCRM Custom: Customer Data: Percentage of Ownership - Other */
+$handler->display->display_options['fields']['percentage_of_ownership_other_81']['id'] = 'percentage_of_ownership_other_81';
+$handler->display->display_options['fields']['percentage_of_ownership_other_81']['table'] = $customer_data['table_name'];
+$handler->display->display_options['fields']['percentage_of_ownership_other_81']['field'] = $percantage_other_ownship;
+$handler->display->display_options['fields']['percentage_of_ownership_other_81']['relationship'] = 'contact_id';
+/* Field: CiviCRM Custom: Customer Data: How did your company first hear about CBI/PUM? */
+$handler->display->display_options['fields']['how_did_your_company_first_hear__512']['id'] = 'how_did_your_company_first_hear__512';
+$handler->display->display_options['fields']['how_did_your_company_first_hear__512']['table'] = $customer_data['table_name'];
+$handler->display->display_options['fields']['how_did_your_company_first_hear__512']['field'] = $how_did_you_hear;
+$handler->display->display_options['fields']['how_did_your_company_first_hear__512']['relationship'] = 'contact_id';
+$handler->display->display_options['fields']['how_did_your_company_first_hear__512']['alter']['strip_tags'] = TRUE;
+/* Field: CiviCRM Custom: Customer Data: Other How did your company first hear about CBI/PUM? */
+$handler->display->display_options['fields']['other_how_did_your_company_first_hear__512']['id'] = 'other_how_did_your_company_first_hear__512';
+$handler->display->display_options['fields']['other_how_did_your_company_first_hear__512']['table'] = $customer_data['table_name'];
+$handler->display->display_options['fields']['other_how_did_your_company_first_hear__512']['field'] = $other_how_did_your;
+$handler->display->display_options['fields']['other_how_did_your_company_first_hear__512']['relationship'] = 'contact_id';
+$handler->display->display_options['fields']['other_how_did_your_company_first_hear__512']['alter']['strip_tags'] = TRUE;
+$handler->display->display_options['fields']['other_how_did_your_company_first_hear__512']['hide_empty'] = TRUE;
 /* Field: CiviCRM Custom: Projectinformation: Additional Comments on Project Proposal */
 if ($comments_field) {
   $handler->display->display_options['fields'][$comments_field]['id'] = $comments_field;
