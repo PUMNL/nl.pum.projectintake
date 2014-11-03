@@ -179,7 +179,7 @@ $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
 $handler->display->display_options['fields']['nothing']['table'] = 'views';
 $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
 $handler->display->display_options['fields']['nothing']['label'] = '';
-$handler->display->display_options['fields']['nothing']['alter']['text'] = 'Asses';
+$handler->display->display_options['fields']['nothing']['alter']['text'] = 'Assess';
 $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
 $handler->display->display_options['fields']['nothing']['alter']['path'] = $asses_webform_path.'?cid2=[id_2]&caseid=[id_1]';
 $handler->display->display_options['fields']['nothing']['alter']['absolute'] = TRUE;
