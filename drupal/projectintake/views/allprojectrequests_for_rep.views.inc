@@ -114,7 +114,7 @@ $handler->display->display_options['fields']['start_date']['id'] = 'start_date';
 $handler->display->display_options['fields']['start_date']['table'] = 'civicrm_case';
 $handler->display->display_options['fields']['start_date']['field'] = 'start_date';
 $handler->display->display_options['fields']['start_date']['label'] = 'Date';
-$handler->display->display_options['fields']['start_date']['date_format'] = 'short';
+$handler->display->display_options['fields']['start_date']['date_format'] = 'd_m_y';
 /* Field: CiviCRM Contacts: Display Name */
 $handler->display->display_options['fields']['display_name']['id'] = 'display_name';
 $handler->display->display_options['fields']['display_name']['table'] = 'civicrm_contact';
