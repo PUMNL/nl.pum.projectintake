@@ -9,15 +9,9 @@ class CRM_Projectintake_UnsetNewCustomerUponRejection extends CRM_Projectintake_
   protected function doAction($caseId) {
     $tag_id = civicrm_api3('Tag', 'getvalue', array('return' => 'id', 'name' => 'New Customer'));
     $case = civicrm_api3('Case', 'getsingle', array('id' => $caseId));
-    foreach($case['contact_id'] as $cid) {
-        try {
-            $tag_entity_id = civicrm_api3('EntityTag', 'getvalue', array('return' => 'id', 'entity' => 'civicrm_contact', 'tag_id' => $tag_id, 'entity_id' => $cid));
-            //unset tag if set
-            civicrm_api3('EntityTag', 'delete', array('id' => $tag_entity_id));
-        } catch (Exception $e) {
-            //do nothing becuase tag New Customer is already unset
-        }
-    }
+    $cids = $case['contact_id'];
+    
+    CRM_Core_BAO_EntityTag::removeEntitiesFromTag($cids, $tag_id, 'civicrm_contact');
   }
   
 }
