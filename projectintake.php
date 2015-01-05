@@ -5,7 +5,12 @@ require_once 'projectintake.civix.php';
 function projectintake_civicrm_custom( $op, $groupID, $entityID, &$params ) {
   $autoCaseStatus = new CRM_Projectintake_AutomaticRejectCaseStatus($groupID, $params);
   if ($autoCaseStatus->isValid()) {
-    $autoCaseStatus->parseStatus();
+    $autoCaseStatus->parse();
+  }
+  
+  $unsetNewCustomerTag = new CRM_Projectintake_UnsetNewCustomerUponRejection($groupID, $params);
+  if ($unsetNewCustomerTag->isValid()) {
+      $unsetNewCustomerTag->parse();
   }
 }
 
