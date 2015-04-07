@@ -9,7 +9,6 @@ $expected_results_field = civicrm_api3('CustomField', 'getvalue', array('return'
 $customer_data = civicrm_api3('CustomGroup', 'getsingle', array('name' => 'Customers_Data'));
 $model = civicrm_api3('CustomField', 'getvalue', array('name' => 'What_is_the_operational_model_of_the_organisation', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
 $services = civicrm_api3('CustomField', 'getvalue', array('name' => 'Products_and_or_Services_offered', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
-$ft_femailes = civicrm_api3('CustomField', 'getvalue', array('name' => 'Fulltime_Females', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
 $turnover = civicrm_api3('CustomField', 'getvalue', array('name' => 'Total_turnover', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
 $balance = civicrm_api3('CustomField', 'getvalue', array('name' => 'Please_state_balance_sheet_total_of_last_year_in_', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
 $start_year = civicrm_api3('CustomField', 'getvalue', array('name' => 'In_which_year_was_your_organisation_founded_', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
@@ -108,11 +107,6 @@ if ($expected_results_field) {
   $handler->display->display_options['fields'][$expected_results_field]['element_label_type'] = 'strong';
   $handler->display->display_options['fields'][$expected_results_field]['empty'] = '<p>-</a>';
 }
-/* Field: CiviCRM Custom: Customer Data: Fulltime Females */
-$handler->display->display_options['fields']['fulltime_females_787']['id'] = 'fulltime_females_787';
-$handler->display->display_options['fields']['fulltime_females_787']['table'] = $customer_data['table_name'];
-$handler->display->display_options['fields']['fulltime_females_787']['field'] = $ft_femailes;
-$handler->display->display_options['fields']['fulltime_females_787']['relationship'] = 'contact_id';
 /* Field: CiviCRM Custom: Customer Data: Total turnover */
 $handler->display->display_options['fields']['total_turnover_788']['id'] = 'total_turnover_788';
 $handler->display->display_options['fields']['total_turnover_788']['table'] = $customer_data['table_name'];
