@@ -9,7 +9,6 @@ $expected_results_field = civicrm_api3('CustomField', 'getvalue', array('return'
 $customer_data = civicrm_api3('CustomGroup', 'getsingle', array('name' => 'Customers_Data'));
 $model = civicrm_api3('CustomField', 'getvalue', array('name' => 'What_is_the_operational_model_of_the_organisation', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
 $services = civicrm_api3('CustomField', 'getvalue', array('name' => 'Products_and_or_Services_offered', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
-$ft_males = civicrm_api3('CustomField', 'getvalue', array('name' => 'Fulltime_Males', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
 $ft_femailes = civicrm_api3('CustomField', 'getvalue', array('name' => 'Fulltime_Females', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
 $turnover = civicrm_api3('CustomField', 'getvalue', array('name' => 'Total_turnover', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
 $balance = civicrm_api3('CustomField', 'getvalue', array('name' => 'Please_state_balance_sheet_total_of_last_year_in_', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
@@ -109,11 +108,6 @@ if ($expected_results_field) {
   $handler->display->display_options['fields'][$expected_results_field]['element_label_type'] = 'strong';
   $handler->display->display_options['fields'][$expected_results_field]['empty'] = '<p>-</a>';
 }
-/* Field: CiviCRM Custom: Customer Data: Fulltime Males */
-$handler->display->display_options['fields']['fulltime_males_786']['id'] = 'fulltime_males_786';
-$handler->display->display_options['fields']['fulltime_males_786']['table'] = $customer_data['table_name'];
-$handler->display->display_options['fields']['fulltime_males_786']['field'] = $ft_males;
-$handler->display->display_options['fields']['fulltime_males_786']['relationship'] = 'contact_id';
 /* Field: CiviCRM Custom: Customer Data: Fulltime Females */
 $handler->display->display_options['fields']['fulltime_females_787']['id'] = 'fulltime_females_787';
 $handler->display->display_options['fields']['fulltime_females_787']['table'] = $customer_data['table_name'];
