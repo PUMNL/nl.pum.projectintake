@@ -9,8 +9,6 @@ $expected_results_field = civicrm_api3('CustomField', 'getvalue', array('return'
 $customer_data = civicrm_api3('CustomGroup', 'getsingle', array('name' => 'Customers_Data'));
 $model = civicrm_api3('CustomField', 'getvalue', array('name' => 'What_is_the_operational_model_of_the_organisation', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
 $services = civicrm_api3('CustomField', 'getvalue', array('name' => 'Products_and_or_Services_offered', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
-$turnover = civicrm_api3('CustomField', 'getvalue', array('name' => 'Total_turnover', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
-$balance = civicrm_api3('CustomField', 'getvalue', array('name' => 'Please_state_balance_sheet_total_of_last_year_in_', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
 $start_year = civicrm_api3('CustomField', 'getvalue', array('name' => 'In_which_year_was_your_organisation_founded_', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
 $legal_form = civicrm_api3('CustomField', 'getvalue', array('name' => 'Legal_form_of_the_Organisation', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
 $other_legal_form  = civicrm_api3('CustomField', 'getvalue', array('name' => 'Other_Legal_Form', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
@@ -107,16 +105,6 @@ if ($expected_results_field) {
   $handler->display->display_options['fields'][$expected_results_field]['element_label_type'] = 'strong';
   $handler->display->display_options['fields'][$expected_results_field]['empty'] = '<p>-</a>';
 }
-/* Field: CiviCRM Custom: Customer Data: Total turnover */
-$handler->display->display_options['fields']['total_turnover_788']['id'] = 'total_turnover_788';
-$handler->display->display_options['fields']['total_turnover_788']['table'] = $customer_data['table_name'];
-$handler->display->display_options['fields']['total_turnover_788']['field'] = $turnover;
-$handler->display->display_options['fields']['total_turnover_788']['relationship'] = 'contact_id';
-/* Field: CiviCRM Custom: Customer Data: Please state balance sheet total of last year (in €) */
-$handler->display->display_options['fields']['please_state_balance_sheet_total_494']['id'] = 'please_state_balance_sheet_total_494';
-$handler->display->display_options['fields']['please_state_balance_sheet_total_494']['table'] = $customer_data['table_name'];
-$handler->display->display_options['fields']['please_state_balance_sheet_total_494']['field'] = $balance;
-$handler->display->display_options['fields']['please_state_balance_sheet_total_494']['relationship'] = 'contact_id';
 /* Field: CiviCRM Custom: Customer Data: What is the operational model of the organisation */
 $handler->display->display_options['fields']['what_is_the_operational_model_of_513']['id'] = 'what_is_the_operational_model_of_513';
 $handler->display->display_options['fields']['what_is_the_operational_model_of_513']['table'] = $customer_data['table_name'];
