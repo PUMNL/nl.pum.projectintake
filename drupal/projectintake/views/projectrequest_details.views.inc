@@ -5,7 +5,6 @@ $custom_group_id = $custom_group['id'];
 $reason_field = civicrm_api3('CustomField', 'getvalue', array('return' => 'column_name', 'name' => 'reason', 'custom_group_id' => $custom_group_id));
 $activities_field = civicrm_api3('CustomField', 'getvalue', array('return' => 'column_name', 'name' => 'activities', 'custom_group_id' => $custom_group_id));
 $expected_results_field = civicrm_api3('CustomField', 'getvalue', array('return' => 'column_name', 'name' => 'expected_results', 'custom_group_id' => $custom_group_id));
-$comments_field = civicrm_api3('CustomField', 'getvalue', array('return' => 'column_name', 'name' => 'Additional_Comments_on_Project_Proposal', 'custom_group_id' => $custom_group_id));
 
 $customer_data = civicrm_api3('CustomGroup', 'getsingle', array('name' => 'Customers_Data'));
 $model = civicrm_api3('CustomField', 'getvalue', array('name' => 'What_is_the_operational_model_of_the_organisation', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
@@ -239,14 +238,6 @@ $handler->display->display_options['fields']['other_how_did_your_company_first_h
 $handler->display->display_options['fields']['other_how_did_your_company_first_hear__512']['relationship'] = 'contact_id';
 $handler->display->display_options['fields']['other_how_did_your_company_first_hear__512']['alter']['strip_tags'] = TRUE;
 $handler->display->display_options['fields']['other_how_did_your_company_first_hear__512']['hide_empty'] = TRUE;
-/* Field: CiviCRM Custom: Projectinformation: Additional Comments on Project Proposal */
-if ($comments_field) {
-  $handler->display->display_options['fields'][$comments_field]['id'] = $comments_field;
-  $handler->display->display_options['fields'][$comments_field]['table'] = $custom_group['table_name'];
-  $handler->display->display_options['fields'][$comments_field]['field'] = $comments_field;
-  $handler->display->display_options['fields'][$comments_field]['element_label_type'] = 'strong';
-  $handler->display->display_options['fields'][$comments_field]['empty'] = '<p>-</a>';
-}
 /* Contextual filter: CiviCRM Cases: Case ID */
 $handler->display->display_options['arguments']['id']['id'] = 'id';
 $handler->display->display_options['arguments']['id']['table'] = 'civicrm_case';
