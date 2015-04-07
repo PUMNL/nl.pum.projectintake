@@ -9,7 +9,6 @@ $expected_results_field = civicrm_api3('CustomField', 'getvalue', array('return'
 $customer_data = civicrm_api3('CustomGroup', 'getsingle', array('name' => 'Customers_Data'));
 $model = civicrm_api3('CustomField', 'getvalue', array('name' => 'What_is_the_operational_model_of_the_organisation', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
 $services = civicrm_api3('CustomField', 'getvalue', array('name' => 'Products_and_or_Services_offered', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
-$when_where_sold = civicrm_api3('CustomField', 'getvalue', array('name' => 'Where_and_how_are_the_products_of_services_sold', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
 $ft_males = civicrm_api3('CustomField', 'getvalue', array('name' => 'Fulltime_Males', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
 $ft_femailes = civicrm_api3('CustomField', 'getvalue', array('name' => 'Fulltime_Females', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
 $turnover = civicrm_api3('CustomField', 'getvalue', array('name' => 'Total_turnover', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
@@ -142,12 +141,6 @@ $handler->display->display_options['fields']['products_and_or_services_offered_8
 $handler->display->display_options['fields']['products_and_or_services_offered_86']['field'] = $services;
 $handler->display->display_options['fields']['products_and_or_services_offered_86']['relationship'] = 'contact_id';
 $handler->display->display_options['fields']['products_and_or_services_offered_86']['alter']['strip_tags'] = TRUE;
-/* Field: CiviCRM Custom: Customer Data: Where and how are the products or services sold */
-$handler->display->display_options['fields']['where_and_how_are_the_products_o_89']['id'] = 'where_and_how_are_the_products_o_89';
-$handler->display->display_options['fields']['where_and_how_are_the_products_o_89']['table'] = $customer_data['table_name'];
-$handler->display->display_options['fields']['where_and_how_are_the_products_o_89']['field'] = $when_where_sold;
-$handler->display->display_options['fields']['where_and_how_are_the_products_o_89']['relationship'] = 'contact_id';
-$handler->display->display_options['fields']['where_and_how_are_the_products_o_89']['alter']['strip_tags'] = TRUE;
 /* Field: CiviCRM Custom: Customer Data: In which year did your organisation started operations? */
 $handler->display->display_options['fields']['in_which_year_was_your_organisat_503']['id'] = 'in_which_year_was_your_organisat_503';
 $handler->display->display_options['fields']['in_which_year_was_your_organisat_503']['table'] = $customer_data['table_name'];
