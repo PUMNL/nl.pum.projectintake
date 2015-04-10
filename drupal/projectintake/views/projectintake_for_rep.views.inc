@@ -184,10 +184,6 @@ $handler->display->display_options['fields']['nothing']['alter']['make_link'] = 
 $handler->display->display_options['fields']['nothing']['alter']['path'] = $asses_webform_path.'?cid2=[id_2]&caseid=[id_1]';
 $handler->display->display_options['fields']['nothing']['alter']['absolute'] = TRUE;
 $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
-$handler->display->display_options['filter_groups']['groups'] = array(
-  1 => 'AND',
-  2 => 'OR',
-);
 /* Filter criterion: CiviCRM Cases: Case Type */
 $handler->display->display_options['filters']['case_type_1']['id'] = 'case_type_1';
 $handler->display->display_options['filters']['case_type_1']['table'] = 'civicrm_case';
@@ -195,14 +191,12 @@ $handler->display->display_options['filters']['case_type_1']['field'] = 'case_ty
 $handler->display->display_options['filters']['case_type_1']['value'] = array(
 	$project_intake_case_type_id => $project_intake_case_type_id,
 );
-$handler->display->display_options['filters']['case_type_1']['group'] = 1;
 /* Filter criterion: User: Current */
 $handler->display->display_options['filters']['uid_current']['id'] = 'uid_current';
 $handler->display->display_options['filters']['uid_current']['table'] = 'users';
 $handler->display->display_options['filters']['uid_current']['field'] = 'uid_current';
 $handler->display->display_options['filters']['uid_current']['relationship'] = 'drupal_id';
 $handler->display->display_options['filters']['uid_current']['value'] = '1';
-$handler->display->display_options['filters']['uid_current']['group'] = 1;
 /* Filter criterion: CiviCRM Activities: Activity Type */
 $handler->display->display_options['filters']['activity_type']['id'] = 'activity_type';
 $handler->display->display_options['filters']['activity_type']['table'] = 'civicrm_activity';
@@ -211,35 +205,23 @@ $handler->display->display_options['filters']['activity_type']['relationship'] =
 $handler->display->display_options['filters']['activity_type']['value'] = array(
 	$open_case_act_id => $open_case_act_id,
 );
-$handler->display->display_options['filters']['activity_type']['group'] = 1;
 /* Filter criterion: CiviCRM Activities: Current Revision */
 $handler->display->display_options['filters']['is_current_revision']['id'] = 'is_current_revision';
 $handler->display->display_options['filters']['is_current_revision']['table'] = 'civicrm_activity';
 $handler->display->display_options['filters']['is_current_revision']['field'] = 'is_current_revision';
 $handler->display->display_options['filters']['is_current_revision']['relationship'] = 'activity_id';
 $handler->display->display_options['filters']['is_current_revision']['value'] = '1';
-$handler->display->display_options['filters']['is_current_revision']['group'] = 1;
 /* Filter criterion: CiviCRM Activities: Is Deleted */
 $handler->display->display_options['filters']['is_deleted']['id'] = 'is_deleted';
 $handler->display->display_options['filters']['is_deleted']['table'] = 'civicrm_activity';
 $handler->display->display_options['filters']['is_deleted']['field'] = 'is_deleted';
 $handler->display->display_options['filters']['is_deleted']['relationship'] = 'activity_id';
 $handler->display->display_options['filters']['is_deleted']['value'] = '0';
-$handler->display->display_options['filters']['is_deleted']['group'] = 1;
-/* Filter criterion: CiviCRM Custom: Intake: Assessment Rep */
-$handler->display->display_options['filters']['assessment_rep_1']['id'] = $asses_rep_field['column_name'];
-$handler->display->display_options['filters']['assessment_rep_1']['table'] = $cgroup_intake['table_name'];
-$handler->display->display_options['filters']['assessment_rep_1']['field'] = $asses_rep_field['column_name'];
-$handler->display->display_options['filters']['assessment_rep_1']['value'] = array(
-  'Pending' => 'Pending',
-);
-$handler->display->display_options['filters']['assessment_rep_1']['group'] = 2;
 /* Filter criterion: CiviCRM Custom: Intake: Assessment Rep */
 $handler->display->display_options['filters']['assessment_rep']['id'] = $asses_rep_field['column_name'];
 $handler->display->display_options['filters']['assessment_rep']['table'] = $cgroup_intake['table_name'];
 $handler->display->display_options['filters']['assessment_rep']['field'] = $asses_rep_field['column_name'];
 $handler->display->display_options['filters']['assessment_rep']['operator'] = 'empty';
-$handler->display->display_options['filters']['assessment_rep']['group'] = 2;
 
 /* Display: Page */
 $handler = $view->new_display('page', 'Page', 'page');
