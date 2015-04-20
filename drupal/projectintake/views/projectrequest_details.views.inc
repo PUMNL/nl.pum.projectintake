@@ -122,6 +122,7 @@ $handler->display->display_options['fields']['in_which_year_was_your_organisat_5
 $handler->display->display_options['fields']['in_which_year_was_your_organisat_503']['table'] = $customer_data['table_name'];
 $handler->display->display_options['fields']['in_which_year_was_your_organisat_503']['field'] = $start_year;
 $handler->display->display_options['fields']['in_which_year_was_your_organisat_503']['relationship'] = 'contact_id';
+$handler->display->display_options['fields']['in_which_year_was_your_organisat_503']['separator'] = '';
 /* Field: CiviCRM Custom: Customer Data: Legal form of the Organisation */
 $handler->display->display_options['fields']['legal_form_of_the_organisation_76']['id'] = 'legal_form_of_the_organisation_76';
 $handler->display->display_options['fields']['legal_form_of_the_organisation_76']['table'] = $customer_data['table_name'];
