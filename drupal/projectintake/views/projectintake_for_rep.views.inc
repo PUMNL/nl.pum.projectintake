@@ -232,3 +232,64 @@ $handler->display->display_options['menu']['weight'] = '-3';
 $handler->display->display_options['menu']['name'] = 'navigation';
 $handler->display->display_options['menu']['context'] = 0;
 $handler->display->display_options['menu']['context_only_inline'] = 0;
+/* Display: My Work Count Item - Block */
+$handler = $view->new_display('block', 'My Work Count Item - Block', 'block_1');
+$handler->display->display_options['defaults']['pager'] = FALSE;
+$handler->display->display_options['pager']['type'] = 'none';
+$handler->display->display_options['pager']['options']['offset'] = '0';
+$handler->display->display_options['defaults']['style_plugin'] = FALSE;
+$handler->display->display_options['style_plugin'] = 'default';
+$handler->display->display_options['defaults']['style_options'] = FALSE;
+$handler->display->display_options['defaults']['row_plugin'] = FALSE;
+$handler->display->display_options['row_plugin'] = 'fields';
+$handler->display->display_options['defaults']['row_options'] = FALSE;
+$handler->display->display_options['defaults']['header'] = FALSE;   
+/* Header: Global: Result summary */
+$handler->display->display_options['header']['result']['id'] = 'result';
+$handler->display->display_options['header']['result']['table'] = 'views';
+$handler->display->display_options['header']['result']['field'] = 'result';
+$handler->display->display_options['header']['result']['content'] = '<a href="/representative/new-projects-requests">New Project Requests</a> (@total)';
+$handler->display->display_options['defaults']['fields'] = FALSE;
+/* Field: CiviCRM Cases: Case ID */
+$handler->display->display_options['fields']['id_1']['id'] = 'id_1';
+$handler->display->display_options['fields']['id_1']['table'] = 'civicrm_case';
+$handler->display->display_options['fields']['id_1']['field'] = 'id';
+$handler->display->display_options['fields']['id_1']['exclude'] = TRUE;
+$handler->display->display_options['fields']['id_1']['separator'] = '';
+/* Field: CiviCRM Contacts: Contact ID */
+$handler->display->display_options['fields']['id_2']['id'] = 'id_2';
+$handler->display->display_options['fields']['id_2']['table'] = 'civicrm_contact';
+$handler->display->display_options['fields']['id_2']['field'] = 'id';
+$handler->display->display_options['fields']['id_2']['relationship'] = 'contact_id';
+$handler->display->display_options['fields']['id_2']['label'] = '';
+$handler->display->display_options['fields']['id_2']['exclude'] = TRUE;
+$handler->display->display_options['fields']['id_2']['element_label_colon'] = FALSE;
+$handler->display->display_options['fields']['id_2']['separator'] = '';
+/* Field: CiviCRM Activities: Scheduled Activity Date */
+$handler->display->display_options['fields']['activity_date_time']['id'] = 'activity_date_time';
+$handler->display->display_options['fields']['activity_date_time']['table'] = 'civicrm_activity';
+$handler->display->display_options['fields']['activity_date_time']['field'] = 'activity_date_time';
+$handler->display->display_options['fields']['activity_date_time']['relationship'] = 'activity_id';
+$handler->display->display_options['fields']['activity_date_time']['label'] = 'Request date';
+$handler->display->display_options['fields']['activity_date_time']['exclude'] = TRUE;
+$handler->display->display_options['fields']['activity_date_time']['date_format'] = 'long';
+$handler->display->display_options['fields']['activity_date_time']['second_date_format'] = 'long';
+/* Field: CiviCRM Contacts: Display Name */
+$handler->display->display_options['fields']['display_name']['id'] = 'display_name';
+$handler->display->display_options['fields']['display_name']['table'] = 'civicrm_contact';
+$handler->display->display_options['fields']['display_name']['field'] = 'display_name';
+$handler->display->display_options['fields']['display_name']['relationship'] = 'contact_id';
+$handler->display->display_options['fields']['display_name']['label'] = 'Customer';
+$handler->display->display_options['fields']['display_name']['exclude'] = TRUE;
+$handler->display->display_options['fields']['display_name']['alter']['make_link'] = TRUE;
+$handler->display->display_options['fields']['display_name']['alter']['path'] = 'customer-profile/[id_2]';
+$handler->display->display_options['fields']['display_name']['alter']['absolute'] = TRUE;
+$handler->display->display_options['fields']['display_name']['link_to_civicrm_contact'] = 0;
+/* Field: Global: Custom text */
+$handler->display->display_options['fields']['nothing_2']['id'] = 'nothing_2';
+$handler->display->display_options['fields']['nothing_2']['table'] = 'views';
+$handler->display->display_options['fields']['nothing_2']['field'] = 'nothing';
+$handler->display->display_options['fields']['nothing_2']['label'] = '';
+$handler->display->display_options['fields']['nothing_2']['element_label_colon'] = FALSE;
+$handler->display->display_options['fields']['nothing_2']['hide_empty'] = TRUE;
+
