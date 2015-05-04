@@ -248,7 +248,7 @@ $handler->display->display_options['defaults']['header'] = FALSE;
 $handler->display->display_options['header']['result']['id'] = 'result';
 $handler->display->display_options['header']['result']['table'] = 'views';
 $handler->display->display_options['header']['result']['field'] = 'result';
-$handler->display->display_options['header']['result']['content'] = '<a href="/representative/new-projects-requests">New Project Requests</a> (@total)';
+$handler->display->display_options['header']['result']['content'] = '<a href="/representative/new-projects-requests">New Project Requests (@total)</a>';
 $handler->display->display_options['defaults']['fields'] = FALSE;
 /* Field: CiviCRM Cases: Case ID */
 $handler->display->display_options['fields']['id_1']['id'] = 'id_1';
