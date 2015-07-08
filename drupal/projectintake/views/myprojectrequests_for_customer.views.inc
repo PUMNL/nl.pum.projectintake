@@ -125,7 +125,7 @@ $handler->display->display_options['fields']['start_date']['table'] = 'civicrm_c
 $handler->display->display_options['fields']['start_date']['field'] = 'start_date';
 $handler->display->display_options['fields']['start_date']['label'] = 'Date';
 $handler->display->display_options['fields']['start_date']['date_format'] = 'custom';
-$handler->display->display_options['fields']['start_date']['custom_date_format'] = 'd F Y';
+$handler->display->display_options['fields']['start_date']['custom_date_format'] = 'j F Y';
 $handler->display->display_options['fields']['start_date']['second_date_format'] = 'long';
 /* Field: CiviCRM Cases: Subject */
 $handler->display->display_options['fields']['subject']['id'] = 'subject';
