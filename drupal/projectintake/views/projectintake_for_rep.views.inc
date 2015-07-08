@@ -153,7 +153,9 @@ $handler->display->display_options['fields']['activity_date_time']['table'] = 'c
 $handler->display->display_options['fields']['activity_date_time']['field'] = 'activity_date_time';
 $handler->display->display_options['fields']['activity_date_time']['relationship'] = 'activity_id';
 $handler->display->display_options['fields']['activity_date_time']['label'] = 'Request date';
-$handler->display->display_options['fields']['activity_date_time']['date_format'] = 'd_m_y';
+$handler->display->display_options['fields']['activity_date_time']['date_format'] = 'custom';
+$handler->display->display_options['fields']['activity_date_time']['custom_date_format'] = 'd F Y';
+$handler->display->display_options['fields']['activity_date_time']['second_date_format'] = 'long';
 /* Field: CiviCRM Contacts: Display Name */
 $handler->display->display_options['fields']['display_name']['id'] = 'display_name';
 $handler->display->display_options['fields']['display_name']['table'] = 'civicrm_contact';
