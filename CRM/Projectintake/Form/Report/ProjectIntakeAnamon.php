@@ -349,6 +349,7 @@ class CRM_Projectintake_Form_Report_ProjectIntakeAnamon extends CRM_Report_Form 
 			  INNER JOIN civicrm_case_activity civicrm_case_activity_cc on  intake_cc_civireport_2.id = civicrm_case_activity_cc.activity_id
 			  WHERE intake_cc_civireport_2.is_deleted = 0 AND intake_cc_civireport_2.is_current_revision = 1 AND intake_cc_civireport_2.activity_type_id = {$intake_cc_id}
 			  {$intake_cc_clause}
+			  GROUP BY civicrm_case_activity_cc.case_id
 		  ) AS {$this->_aliases['intake_cc']} ON {$this->_aliases['intake_cc']}.case_id = {$this->_aliases['civicrm_case']}.id
 
 
@@ -359,6 +360,7 @@ class CRM_Projectintake_Form_Report_ProjectIntakeAnamon extends CRM_Report_Form 
 			  INNER JOIN civicrm_case_activity civicrm_case_activity_sc on  intake_sc_civireport_2.id = civicrm_case_activity_sc.activity_id
 			  WHERE intake_sc_civireport_2.is_deleted = 0 AND intake_sc_civireport_2.is_current_revision = 1 AND intake_sc_civireport_2.activity_type_id = {$intake_sc_id}
 			  {$intake_sc_clause}
+			  GROUP BY civicrm_case_activity_sc.case_id
 		  ) AS {$this->_aliases['intake_sc']} ON {$this->_aliases['intake_sc']}.case_id = {$this->_aliases['civicrm_case']}.id
 
 
@@ -369,6 +371,7 @@ class CRM_Projectintake_Form_Report_ProjectIntakeAnamon extends CRM_Report_Form 
 			  INNER JOIN civicrm_case_activity civicrm_case_activity_anamon on  intake_anamon_civireport_2.id = civicrm_case_activity_anamon.activity_id
 			  WHERE intake_anamon_civireport_2.is_deleted = 0 AND intake_anamon_civireport_2.is_current_revision = 1 AND intake_anamon_civireport_2.activity_type_id = {$intake_anamon_id}
 			  {$intake_anamon_clause}
+			  GROUP BY civicrm_case_activity_anamon.case_id
 		  ) AS {$this->_aliases['intake_anamon']} ON {$this->_aliases['intake_anamon']}.case_id = {$this->_aliases['civicrm_case']}.id
 
 
@@ -439,9 +442,9 @@ class CRM_Projectintake_Form_Report_ProjectIntakeAnamon extends CRM_Report_Form 
     }
   }
 
-  /*function buildQuery($applyLimit = TRUE) {
+  function buildQuery($applyLimit = TRUE) {
     $sql = parent::buildQuery();
     echo $sql; exit();
     return $sql;
-  }*/
+  }
 }
