@@ -442,9 +442,9 @@ class CRM_Projectintake_Form_Report_ProjectIntakeAnamon extends CRM_Report_Form 
     }
   }
 
-  function buildQuery($applyLimit = TRUE) {
+  /*function buildQuery($applyLimit = TRUE) {
     $sql = parent::buildQuery();
     echo $sql; exit();
     return $sql;
-  }
+  }*/
 }
