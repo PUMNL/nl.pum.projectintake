@@ -21,7 +21,6 @@ class CRM_Projectintake_Form_Report_ProjectIntakeAnamon extends CRM_Report_Form 
     $this->cgIntakeSC = civicrm_api3('CustomGroup', 'getsingle', array('name' => 'Intake_Customer_by_SC'));
     $this->cfApproveSC = civicrm_api3('CustomField', 'getsingle', array('name' => 'Conclusion_Do_you_want_to_approve_this_customer_', 'custom_group_id' => $this->cgIntakeSC['id']));
     $this->cgIntakeAnamon = civicrm_api3('CustomGroup', 'getsingle', array('name' => 'Intake_Customer_by_Anamon'));
-    $this->cfApproveIntakeAnamon = civicrm_api3('CustomField', 'getsingle', array('name' => 'Do_you_approve_the_Customer_', 'custom_group_id' => $this->cgIntakeAnamon['id']));
     $this->cfApproveProjectAnamon = civicrm_api3('CustomField', 'getsingle', array('name' => 'Do_you_approve_the_project_', 'custom_group_id' => $this->cgIntakeAnamon['id']));
 
     $this->_columns = array(
@@ -239,11 +238,6 @@ class CRM_Projectintake_Form_Report_ProjectIntakeAnamon extends CRM_Report_Form 
       'intake_anamon_cg' => array(
         'alias' => 'intake_anamon_cg',
         'fields' => array(
-          'intake_anamon_approve_customer' => array(
-            'default' => true,
-            'name' => $this->cfApproveIntakeAnamon['column_name'],
-            'title' => ts('Intake approved by Anamon')
-          ),
           'intake_anamon_approve_projecct' => array(
             'default' => true,
             'name' => $this->cfApproveProjectAnamon['column_name'],
