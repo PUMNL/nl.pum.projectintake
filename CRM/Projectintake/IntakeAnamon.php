@@ -23,9 +23,9 @@ class CRM_Projectintake_IntakeAnamon {
       $intakeAnamonConfig = CRM_Projectintake_IntakeAnamonConfig::singleton();
       if ($form->_caseType == $config->getCaseTypeName() && $form->_activityTypeId == $intakeAnamonConfig->getActivityTypeId()) {
         if (self::userCanEditCustomFields() == TRUE) {
-          //self::switchCustomFields("edit");
+          self::switchCustomFields("edit");
         } else {
-          //self::switchCustomFields("view");
+          self::switchCustomFields("view");
           $element = $form->getElement("status_id");
           $element->freeze();
         }
