@@ -8,26 +8,51 @@
  * @license AGPL-3.0
  */
 
-class CRM_Projectintake_IntakeAnamon {
+class CRM_Projectintake_IntakeAnamon
+{
+
+  /**
+   * Method to filter custom field name and values from form fields
+   *
+   * @param $customFieldName
+   * @param $fields
+   * @return array
+   */
+  public static function getFormCustomFieldData($customFieldName, $fields)
+  {
+    $formCustomFieldData = array();
+    foreach ($fields as $fieldName => $fieldValue) {
+      $fieldNameParts = explode("_", $fieldName);
+      if (isset($fieldNameParts[1]) && $fieldNameParts[0] == "custom") {
+        $name = "custom_" . $fieldNameParts[1];
+        if ($name == $customFieldName) {
+          $formCustomFieldData['id'] = $fieldNameParts[1];
+          $formCustomFieldData['name'] = "custom_" . $fieldNameParts[1];
+          $formCustomFieldData['value'] = $fieldValue;
+          $formCustomFieldData['form_name'] = $fieldName;
+        }
+      }
+    }
+    return $formCustomFieldData;
+  }
 
   /**
    * Method buildForm to process actions from civicrm hook buildForm
-   * - issue 3021 only allow Intake Customer by Anamon activity for case if user has role Anamon
+   * - issue 3021 only allow update status activity if user has role Anamon
    *
    * @param string $formName
    * @param object $form
    */
-  public static function buildForm($formName, &$form) {
+  public static function buildForm($formName, &$form)
+  {
     if ($formName == "CRM_Case_Form_Activity") {
       $config = CRM_Projectintake_Config::singleton();
       $intakeAnamonConfig = CRM_Projectintake_IntakeAnamonConfig::singleton();
       if ($form->_caseType == $config->getCaseTypeName() && $form->_activityTypeId == $intakeAnamonConfig->getActivityTypeId()) {
-        if (self::userCanEditCustomFields() == TRUE) {
-          self::switchCustomFields("edit");
-        } else {
-          self::switchCustomFields("view");
-          $element = $form->getElement("status_id");
-          $element->freeze();
+        if (!self::userCanEditIntakeAnamon()) {
+          CRM_Core_Region::instance('page-body')->add(array('template' => 'CRM/Projectintake/IntakeAnamonReadOnly.tpl'));
+          $statusElement = $form->getElement("status_id");
+          $statusElement->freeze();
         }
       }
     }
@@ -39,36 +64,14 @@ class CRM_Projectintake_IntakeAnamon {
    *
    * @return bool
    */
-  public static function userCanEditCustomFields() {
+  public static function userCanEditIntakeAnamon()
+  {
     global $user;
     $intakeAnamonConfig = CRM_Projectintake_IntakeAnamonConfig::singleton();
     if (in_array($intakeAnamonConfig->getAnamonRoleName(), $user->roles) || in_array("administrator", $user->roles)) {
       return TRUE;
     } else {
       return FALSE;
-    }
-  }
-
-  /**
-   * Method to set custom fields to view only or edit mode
-   *
-   * @param string $type
-   */
-  public static function switchCustomFields($type) {
-    if ($type == "view") {
-      $isView = 1;
-    } else {
-      $isView = 0;
-    }
-    $intakeAnamonConfig = CRM_Projectintake_IntakeAnamonConfig::singleton();
-    $customGroup = $intakeAnamonConfig->getCustomGroup();
-    foreach ($customGroup['custom_fields'] as $customFieldId => $customField) {
-      $query = "UPDATE civicrm_custom_field SET is_view = %1 WHERE id = %2";
-      $params = array(
-        1 => array($isView, "Integer"),
-        2 => array($customFieldId, "Integer")
-      );
-      CRM_Core_DAO::executeQuery($query, $params);
     }
   }
 }
