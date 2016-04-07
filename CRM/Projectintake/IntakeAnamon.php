@@ -18,8 +18,7 @@ class CRM_Projectintake_IntakeAnamon
    * @param $fields
    * @return array
    */
-  public static function getFormCustomFieldData($customFieldName, $fields)
-  {
+  public static function getFormCustomFieldData($customFieldName, $fields) {
     $formCustomFieldData = array();
     foreach ($fields as $fieldName => $fieldValue) {
       $fieldNameParts = explode("_", $fieldName);
@@ -43,8 +42,7 @@ class CRM_Projectintake_IntakeAnamon
    * @param string $formName
    * @param object $form
    */
-  public static function buildForm($formName, &$form)
-  {
+  public static function buildForm($formName, &$form) {
     if ($formName == "CRM_Case_Form_Activity") {
       $config = CRM_Projectintake_Config::singleton();
       $intakeAnamonConfig = CRM_Projectintake_IntakeAnamonConfig::singleton();
@@ -64,8 +62,7 @@ class CRM_Projectintake_IntakeAnamon
    *
    * @return bool
    */
-  public static function userCanEditIntakeAnamon()
-  {
+  public static function userCanEditIntakeAnamon() {
     global $user;
     $intakeAnamonConfig = CRM_Projectintake_IntakeAnamonConfig::singleton();
     if (in_array($intakeAnamonConfig->getAnamonRoleName(), $user->roles) || in_array("administrator", $user->roles)) {
