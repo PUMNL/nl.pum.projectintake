@@ -12,30 +12,6 @@ class CRM_Projectintake_IntakeAnamon
 {
 
   /**
-   * Method to filter custom field name and values from form fields
-   *
-   * @param $customFieldName
-   * @param $fields
-   * @return array
-   */
-  public static function getFormCustomFieldData($customFieldName, $fields) {
-    $formCustomFieldData = array();
-    foreach ($fields as $fieldName => $fieldValue) {
-      $fieldNameParts = explode("_", $fieldName);
-      if (isset($fieldNameParts[1]) && $fieldNameParts[0] == "custom") {
-        $name = "custom_" . $fieldNameParts[1];
-        if ($name == $customFieldName) {
-          $formCustomFieldData['id'] = $fieldNameParts[1];
-          $formCustomFieldData['name'] = "custom_" . $fieldNameParts[1];
-          $formCustomFieldData['value'] = $fieldValue;
-          $formCustomFieldData['form_name'] = $fieldName;
-        }
-      }
-    }
-    return $formCustomFieldData;
-  }
-
-  /**
    * Method buildForm to process actions from civicrm hook buildForm
    * - issue 3021 only allow update status activity if user has role Anamon
    *
@@ -43,16 +19,82 @@ class CRM_Projectintake_IntakeAnamon
    * @param object $form
    */
   public static function buildForm($formName, &$form) {
-    if ($formName == "CRM_Case_Form_Activity") {
-      $config = CRM_Projectintake_Config::singleton();
-      $intakeAnamonConfig = CRM_Projectintake_IntakeAnamonConfig::singleton();
-      if ($form->_caseType == $config->getCaseTypeName() && $form->_activityTypeId == $intakeAnamonConfig->getActivityTypeId()) {
+    switch ($formName) {
+      case "CRM_Case_Form_Activity":
         if (!self::userCanEditIntakeAnamon()) {
-          CRM_Core_Region::instance('page-body')->add(array('template' => 'CRM/Projectintake/IntakeAnamonReadOnly.tpl'));
-          $statusElement = $form->getElement("status_id");
-          $statusElement->freeze();
+          self::protectIntakeAnamonOnCase($form);
+        }
+      break;
+      case "CRM_Activity_Form_Activity":
+        if (!self::userCanEditIntakeAnamon()) {
+          self::protectIntakeAnamonOnActivity($form);
+        }
+      break;
+    }
+    if ($formName == "CRM_Case_Form_Activity") {
+      if (!self::userCanEditIntakeAnamon()) {
+
+      }
+    }
+  }
+
+  /**
+   * Method to protect activity intake anamon on activity form
+   *
+   * @param $form
+   */
+  private static function protectIntakeAnamonOnActivity(&$form) {
+    $intakeAnamonConfig = CRM_Projectintake_IntakeAnamonConfig::singleton();
+    // freeze custom elements
+    if (isset($form->_subType) && isset($form->_type)) {
+      if ($form->_type == 'Activity' && $form->_subType == $intakeAnamonConfig->getActivityTypeId()) {
+        $customFields = $intakeAnamonConfig->getCustomGroup('custom_fields');
+        foreach ($customFields as $customFieldId => $customField) {
+          foreach ($form->_elementIndex as $indexName => $index) {
+            $parts = explode('_', $indexName);
+            if ($parts[0] = 'custom' && isset($parts[1]) && $parts[1] == $customFieldId) {
+              $customElement = $form->getElement($indexName);
+              $customElement->freeze();
+            }
+          }
         }
       }
+    }
+    if ($form->_activityTypeId == $intakeAnamonConfig->getActivityTypeId()) {
+      CRM_Core_Region::instance('page-body')->add(array('template' => 'CRM/Projectintake/IntakeAnamonReadOnly.tpl'));
+      $statusElement = $form->getElement("status_id");
+      $statusElement->freeze();
+    }
+  }
+
+  /**
+   * Method to protect activity intake anamon on case form
+   *
+   * @param $form
+   */
+  private static function protectIntakeAnamonOnCase(&$form) {
+    $config = CRM_Projectintake_Config::singleton();
+    $intakeAnamonConfig = CRM_Projectintake_IntakeAnamonConfig::singleton();
+    // freeze custom elements
+    if (isset($form->_subType) && isset($form->_type)) {
+      if ($form->_type == 'Activity' && $form->_subType == $intakeAnamonConfig->getActivityTypeId()) {
+        $customFields = $intakeAnamonConfig->getCustomGroup('custom_fields');
+        foreach ($customFields as $customFieldId => $customField) {
+          foreach ($form->_elementIndex as $indexName => $index) {
+            $parts = explode('_', $indexName);
+            if ($parts[0] = 'custom' && isset($parts[1]) && $parts[1] == $customFieldId) {
+              $customElement = $form->getElement($indexName);
+              $customElement->freeze();
+            }
+          }
+        }
+      }
+    }
+
+    if ($form->_caseType == $config->getCaseTypeName() && $form->_activityTypeId == $intakeAnamonConfig->getActivityTypeId()) {
+      CRM_Core_Region::instance('page-body')->add(array('template' => 'CRM/Projectintake/IntakeAnamonReadOnly.tpl'));
+      $statusElement = $form->getElement("status_id");
+      $statusElement->freeze();
     }
   }
 
@@ -65,7 +107,8 @@ class CRM_Projectintake_IntakeAnamon
   public static function userCanEditIntakeAnamon() {
     global $user;
     $intakeAnamonConfig = CRM_Projectintake_IntakeAnamonConfig::singleton();
-    if (in_array($intakeAnamonConfig->getAnamonRoleName(), $user->roles) || in_array("administrator", $user->roles)) {
+    //if (in_array($intakeAnamonConfig->getAnamonRoleName(), $user->roles) || in_array("administrator", $user->roles)) {
+    if (in_array($intakeAnamonConfig->getAnamonRoleName(), $user->roles)) {
       return TRUE;
     } else {
       return FALSE;
