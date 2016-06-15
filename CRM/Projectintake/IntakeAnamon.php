@@ -107,8 +107,7 @@ class CRM_Projectintake_IntakeAnamon
   public static function userCanEditIntakeAnamon() {
     global $user;
     $intakeAnamonConfig = CRM_Projectintake_IntakeAnamonConfig::singleton();
-    //if (in_array($intakeAnamonConfig->getAnamonRoleName(), $user->roles) || in_array("administrator", $user->roles)) {
-    if (in_array($intakeAnamonConfig->getAnamonRoleName(), $user->roles)) {
+    if (in_array($intakeAnamonConfig->getAnamonRoleName(), $user->roles) || in_array("administrator", $user->roles)) {
       return TRUE;
     } else {
       return FALSE;
