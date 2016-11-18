@@ -40,8 +40,6 @@ function projectintake_civicrm_xmlMenu(&$files) {
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_install
  */
 function projectintake_civicrm_install() {
-  // issue 3021 run config to rename and remove custom fields if still required
-  CRM_Projectintake_IntakeAnamonConfig::singleton();
   return _projectintake_civix_civicrm_install();
 }
 
@@ -119,14 +117,4 @@ function projectintake_civicrm_caseTypes(&$caseTypes) {
  */
 function projectintake_civicrm_alterSettingsFolders(&$metaDataFolders = NULL) {
   _projectintake_civix_civicrm_alterSettingsFolders($metaDataFolders);
-}
-/**
- * Implementation of hook civicrm_buildForm
- *
- * @param string $formName
- * @param object $form
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_buildForm
- */
-function projectintake_civicrm_buildForm($formName, &$form) {
-  CRM_Projectintake_IntakeAnamon::buildForm($formName, $form);
 }
