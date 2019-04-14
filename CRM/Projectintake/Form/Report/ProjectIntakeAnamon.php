@@ -322,7 +322,7 @@ class CRM_Projectintake_Form_Report_ProjectIntakeAnamon extends CRM_Report_Form 
     $activity_type_id = civicrm_api3('OptionGroup', 'getvalue', array('return' => 'id', 'name' => 'activity_type'));
     $intake_cc_id = civicrm_api3('OptionValue', 'getvalue', array('return' => 'value', 'name' => 'Intake Customer by CC', 'option_group_id' => $activity_type_id));
     $intake_sc_id = civicrm_api3('OptionValue', 'getvalue', array('return' => 'value', 'name' => 'Intake Customer by SC', 'option_group_id' => $activity_type_id));
-    $intake_anamon_id = civicrm_api3('OptionValue', 'getvalue', array('return' => 'value', 'name' => 'Intake Customer by Anamon', 'option_group_id' => $activity_type_id));
+    $intake_anamon_id = civicrm_api3('OptionValue', 'getvalue', array('return' => 'value', 'name' => 'Intake Customer by PrOf', 'option_group_id' => $activity_type_id));
 
     $intake_cc_clause = $this->determineClause('intake_cc', 'intake_cc_civireport_2');
     $intake_sc_clause = $this->determineClause('intake_sc', 'intake_sc_civireport_2');
